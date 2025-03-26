@@ -17,7 +17,7 @@ def upload_to_s3(file_path):
     s3_prefix = os.getenv('S3_PREFIX')
     try:
         region = os.getenv('AWS_REGION', 'us-west-2')
-        print(bucket_name)
+        
         s3_client = boto3.client('s3', region_name=region)
         file_name = os.path.basename(file_path)
         s3_key = f"{s3_prefix.strip('/')}/{file_name}"

@@ -130,9 +130,9 @@ class TestJSONLStructure:
                 assert isinstance(record['system'], list)
                 assert 'text' in record['system'][0]
                 assert 'messages' in record
-                assert len(record['messages']) == 2
+                assert len(record['messages']) == 1
                 assert record['messages'][0]['role'] == 'user'
-                assert record['messages'][1]['role'] == 'assistant'
+                ## assert record['messages'][1]['role'] == 'assistant'
 
 class TestS3Upload(unittest.TestCase):
 

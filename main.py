@@ -18,7 +18,10 @@ def create_jsonl_record_for_distillation(user_query, tool_config, selected_tool)
         "schemaVersion": "bedrock-conversation-2024",
         "system": [
             {
-                "text": "You are an AI assistant that helps users select appropriate tools."
+                "text": "You are an AI assistant that helps users select appropriate tool for a given user query. "
+                "The user query is present in <userquery> </usrequery> tags and the tools are present in <tools> </tools> tags. "
+                "You respond with the chosen tool in and fill in the toolSpec based on the info available in the user query in the <result>  </result> tags. "
+                "Your response must follow the schema of the toolspec. You respond without preamble."
             }
         ],
         "messages": [
@@ -26,18 +29,19 @@ def create_jsonl_record_for_distillation(user_query, tool_config, selected_tool)
                 "role": "user",
                 "content": [
                     {
-                        "text": f"User Query: {user_query}\nTool Config: {tool_config}"
+                        "text": f"<userquery>{user_query}</usrequery>\n<tools>{tool_config}</tools>"
                     }
                 ]
             },
-            {
-                "role": "assistant",
-                "content": [
-                    {
-                        "text": selected_tool
-                    }
-                ]
-            }
+            # # keep this optional if you want to rely on teacher model's intelligence to predict the tool.
+            # {
+            #     "role": "assistant",
+            #     "content": [
+            #         {
+            #             "text": ""
+            #         }
+            #     ]
+            # }
         ]
     }
     return record
